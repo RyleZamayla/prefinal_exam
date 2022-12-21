@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -42,8 +44,8 @@ class _TodoListState extends State<TodoList> {
 
   @override
   void initState() {
-    getTodo();
     super.initState();
+    getTodo();
   }
 
   getTodo() async {
@@ -59,21 +61,32 @@ class _TodoListState extends State<TodoList> {
     }
   }
 
+  Future getItemTodo(int myOwnId) async {
+    var itemUrl = 'https://jsonplaceholder.typicode.com/todos';
+    var item = await http.get(Uri.parse('$itemUrl/$myOwnId'));
+    Map map = convert.jsonDecode(item.body);
+    // ignore: non_constant_identifier_names
+    String Title = map['title'];
+    return Title;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Initial start"),
+        title: const Text("Initial start")
       ),
       body: ListView.builder(
         itemCount: todos.length,
           itemBuilder: (BuildContext context, int index){
           return GestureDetector(
           onLongPress: () async {
+
+            String holder = await getItemTodo(todos[index]['id']);
             await Navigator.push(
               context,
                 MaterialPageRoute(
-                  builder: (context) => ViewItem(myOwnId: todos[index]['id'], getItem: getTodo)),
+                  builder: (context) => ViewItem(Title: holder)),
                 );
                 setState(() {
 
