@@ -1,7 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
-
 import 'package:flutter/material.dart';
-
 
 class ViewItem extends StatefulWidget {
 
@@ -13,9 +11,6 @@ class ViewItem extends StatefulWidget {
 }
 
 class _ViewItemState extends State<ViewItem> {
-
-  late dynamic todosPlaceholder = {};
-
 
   @override
   void initState() {
