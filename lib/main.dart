@@ -38,7 +38,6 @@ class TodoList extends StatefulWidget {
   State<TodoList> createState() => _TodoListState();
 }
 
-
 class _TodoListState extends State<TodoList> {
   List todos = <dynamic> [];
 
@@ -81,7 +80,6 @@ class _TodoListState extends State<TodoList> {
           itemBuilder: (BuildContext context, int index){
           return GestureDetector(
           onLongPress: () async {
-
             String holder = await getItemTodo(todos[index]['id']);
             await Navigator.push(
               context,
@@ -89,7 +87,6 @@ class _TodoListState extends State<TodoList> {
                   builder: (context) => ViewItem(Title: holder)),
                 );
                 setState(() {
-
                 });
               },
             child: ListTile(
